@@ -11,7 +11,7 @@ import sequelizeConnection from "./db/config/connection";
 
 const app: Application = express();
 app.set("view engine", "ejs");
-app.set("views", "assets/authorization-server");
+app.set("views", "src/views");
 app.use(timeout);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

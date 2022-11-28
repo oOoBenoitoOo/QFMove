@@ -6,21 +6,15 @@ import { containsAll, randomString } from "../../helper";
 export const authorize = async (req: Request, res: Response) => {
   const { client_id, scope } = req.query;
   const client = await getApplicationsByUUID(client_id as string);
-  if (!client) {
-    res.status(401).send("Error: client not authorized");
-    return;
-  }
+  if (!client) return res.status(401).send("Error: client not authorized");
 
-  if (
-    typeof req.query.scope !== "string" ||
-    !containsAll(
-      client.scopes.map((scope: any) => scope.label),
-      req.query.scope.split(" ")
-    )
-  ) {
-    res.status(401).send("Error: invalid scopes requested");
-    return;
-  }
+  const requiredScope = containsAll(
+    client.scopes.map((item: any) => item.label),
+    (scope as string)?.split(" ")
+  );
+  if (typeof req.query.scope !== "string" || !requiredScope)
+    return res.status(401).send("Error: invalid scopes requested");
+
   const requestId: string = randomString();
   await createRequest({
     requestId,

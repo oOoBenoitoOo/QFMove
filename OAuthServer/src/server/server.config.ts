@@ -6,6 +6,5 @@ export const config = {
   clientId: "my-client",
   clientSecret: "zETqHgl0d7ThysUqPnaFuLOmG1E=",
   redirectUri: "http://localhost:9003/callback",
-
   authorizationEndpoint: "http://localhost:9001/authorize",
 };

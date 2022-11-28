@@ -1,35 +1,33 @@
 import { Request, Response } from "express";
 import { createCode } from "../services/codes.service";
 import { destroyRequest, getByRequestId } from "../services/requests.service";
-import { getByUserNameAndPassword } from "../services/users.service";
+import { getByEmail } from "../services/users.service";
 import { randomString } from "./../../helper";
+import bcrypt from "bcrypt";
 
 export const approve = async (req: Request, res: Response) => {
-  const { userName, password, requestId } = req.body;
-  if (!userName) {
-    res.status(401).send("Error: wrong userName ");
-    return;
-  }
-  const user = await getByUserNameAndPassword(userName, password);
-  if (!user) {
-    res.status(401).send("Error: wrong password ");
-    return;
-  }
+  const { email, password, requestId } = req.body;
+  if (!email) return res.status(401).send("Error: wrong email ");
+
+  const user = await getByEmail(email);
+
+  if (!user && (await bcrypt.compare(password, user!.password)))
+    return res.status(401).send("Error: wrong password ");
+
   const clientReq = await getByRequestId(requestId);
+
   await destroyRequest(requestId);
-  if (!clientReq) {
-    res.status(401).send("Error: unknow request");
-    return;
-  }
+  if (!clientReq) return res.status(401).send("Error: unknow request");
+
   const code = randomString();
   await createCode({
     code,
     content: {
-      userName,
+      userName: user?.username,
       clientReq,
-      userId: user.id,
+      userId: user?.id,
     },
-    user_id: user.id!,
+    user_id: user?.id!,
   });
 
   const { redirect_uri, state } = clientReq.content;

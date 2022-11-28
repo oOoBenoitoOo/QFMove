@@ -1,5 +1,8 @@
-import { Users, UsersOutput } from "../models/users.model";
+import { Users, UsersInput, UsersOutput } from "../models/users.model";
 import { Op } from "sequelize";
+
+export const create = async (payload: UsersInput): Promise<UsersOutput> =>
+  await Users.create(payload);
 
 export const getUserByUserNameAndPassword = async (
   username: string,
@@ -13,3 +16,10 @@ export const getUserByUserNameAndPassword = async (
   }
   return user;
 };
+
+export const getUserByEmail = async (
+  email: string
+): Promise<UsersOutput | null> =>
+  await Users.findOne({
+    where: { email },
+  });
