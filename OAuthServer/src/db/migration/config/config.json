@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "Goto2023.",
+    "database": "QFMOVE_Oauth",
+    "host": "localhost",
+    "port": 5433,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "Goto2023.",
+    "database": "QFMOVE_Oauth",
+    "host": "localhost",
+    "port": 5433,
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "Goto2023.",
+    "database": "QFMOVE_Oauth",
+    "host": "localhost",
+    "port": 5433,
+    "dialect": "postgres"
+  }
+}
