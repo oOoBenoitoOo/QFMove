@@ -1,33 +1,112 @@
-
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Login Page</title>
-	</head>
-	<body>
-		<p>
-			Register
-		</p>
-		<form action="/register" method="post">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+      rel="stylesheet"
+    />
 
-			<label for="userName">User name: </label>
-			<input type="text" name="userName" /><br />
+    <link rel="stylesheet" href="../fonts/icomoon/style.css" />
 
-            <label for="firstName">First Name: </label>
-			<input type="text" name="firstName" /><br />
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" />
 
-            <label for="lastName">Last Name: </label>
-			<input type="text" name="lastName" /><br />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
 
-            <label for="email">Email: </label>
-			<input type="email" name="email" /><br />
+    <!-- Style -->
+    <link rel="stylesheet" href="../css/style.css" />
 
-			<label for="password">Password: </label>
-			<input type="password" name="password" /><br />
-            
-			<input type="submit" value="Approve" />
-		</form>
-	</body>
+    <title>Move to Quebec</title>
+  </head>
+  <body>
+    <div class="d-lg-flex half">
+      <div
+        class="bg order-1 order-md-2"
+        style="background-image: url('../images/bg2.jpg')"
+      ></div>
+      <div class="contents order-2 order-md-1">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7">
+              <h3>Inscription</h3>
+			  <p class="mb-4">
+                Entrez vos informations afin de créer un compte.
+              </p>
+              <form class="form" action="/register" method="post">
+                <div class="form-group first">
+                  <label for="userName">Nom d'utilisateur: </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="userName"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="firstName">Prénom: </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="firstName"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Nom: </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="lastName"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email: </label>
+                  <input type="email" class="form-control" name="email" required/>
+                </div>
+                <div class="form-group">
+                  <label for="password">Mot de passe: </label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    required
+                  />
+                </div>
+				<div class="form-group last">
+                  <label for="password">Confirmer mot de passe: </label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    required
+                  />
+                </div>
+                <input
+                  type="hidden"
+                  name="requestId"
+                  value="<%- requestId %>"
+                />
+                <input
+                  type="submit"
+                  class="btn btn-block btn-primary"
+                  value="Approve"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
 </html>

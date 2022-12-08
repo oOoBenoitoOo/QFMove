@@ -6,9 +6,7 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { AccessTokens } from "./accesstokens.model";
 import { Applications } from "./applications.model";
-import { ScopeAccessTokens } from "./scope-accesstokens.model";
 import { ScopeApplications } from "./scope-applications.model";
 
 export interface ScopesAttributes {
@@ -36,9 +34,6 @@ export class Scopes extends Model<ScopesAttributes, ScopesInput> {
     allowNull: false,
   })
   label!: string;
-
-  @BelongsToMany(() => AccessTokens, () => ScopeAccessTokens)
-  accesstokens!: AccessTokens[];
 
   @BelongsToMany(() => Applications, () => ScopeApplications)
   applications!: Applications[];

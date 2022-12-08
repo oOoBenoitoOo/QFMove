@@ -16,6 +16,7 @@ export const toUsersDTO = (user: UsersOutput): UsersDTO => {
 
 export const toUsers = (user: UsersDTO): UsersInput => {
   return {
+    id: user.id,
     password: user.password,
     last_login: user.last_login,
     username: user.username,

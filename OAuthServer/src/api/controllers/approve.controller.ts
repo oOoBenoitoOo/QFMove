@@ -7,23 +7,35 @@ import bcrypt from "bcrypt";
 
 export const approve = async (req: Request, res: Response) => {
   const { email, password, requestId } = req.body;
-  if (!email) return res.status(401).send("Error: wrong email ");
+  if (!email || !password || !requestId)
+    return res.status(401).send("Error: form not conform ");
 
   const user = await getByEmail(email);
+  if (!user)
+    return res.render(`login`, { requestId, error: "Ce compte n'existe pas." });
 
-  if (!user && (await bcrypt.compare(password, user!.password)))
-    return res.status(401).send("Error: wrong password ");
+  const validPassword = await bcrypt.compare(password, user!.password);
+  if (!validPassword)
+    return res.render(`login`, {
+      requestId,
+      error: "Mot de passe n'est pas valide.",
+    });
 
   const clientReq = await getByRequestId(requestId);
 
   await destroyRequest(requestId);
-  if (!clientReq) return res.status(401).send("Error: unknow request");
+  if (!clientReq)
+    return res.render(`login`, {
+      requestId,
+      error: "Une erreur s'est produite (identifiant de la requête).",
+    });
 
   const code = randomString();
   await createCode({
     code,
     content: {
       userName: user?.username,
+      email,
       clientReq,
       userId: user?.id,
     },

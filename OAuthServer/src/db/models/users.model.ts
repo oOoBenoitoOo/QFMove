@@ -7,7 +7,6 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { AccessTokens } from "./accesstokens.model";
 import { Applications } from "./applications.model";
 
 interface UsersAttributes {
@@ -77,7 +76,4 @@ export class Users extends Model {
     type: DataType.INTEGER,
   })
   application_id!: number;
-
-  @HasMany(() => AccessTokens)
-  accesstokens!: AccessTokens[];
 }
